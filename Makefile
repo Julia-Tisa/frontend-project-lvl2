@@ -3,4 +3,4 @@ install: # установка зависимостей
 lint: # запуск линтера
 	npx eslint
 test: # запуск тестов
-    npm test
+	npm test
