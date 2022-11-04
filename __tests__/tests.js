@@ -1,10 +1,10 @@
 import { test, expect } from '@jest/globals';
-import genDiff from '../bin';
+import genDiff from '../bin/index.js';
 import fs from 'fs';
 import path from 'path'
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), '__fixtures__', filepath);
-const readFile = (filepath) => fs.readFileSync(getFullPath(filepath1), 'utf-8');
+const readFile = (filepath) => fs.readFileSync(getFullPath(filepath), 'utf-8');
 
 const filepath1 = getFullPath('file1.json');
 const filepath2 = getFullPath('file2.json');
@@ -19,5 +19,5 @@ test('test with json', () => {
   });
 
 test('test with yaml', () => {
-  expect(genDiff(filepath3, filepath4).toBe(result2));
+  expect(genDiff(filepath3, filepath4)).toBe(result2);
 });
