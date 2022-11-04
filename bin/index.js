@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 
-const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
+const getFullPath = (filepath) => path.resolve(process.cwd(), '__fixtures__', filepath);
 const buildTree = (obj1, obj2) => {
     const keys = [obj1, obj2].flatMap(Object.keys);
     const unionKeys = _.sortBy(_.union(keys));
