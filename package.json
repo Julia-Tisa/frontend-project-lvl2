@@ -22,10 +22,11 @@
   "homepage": "https://github.com/Julia-Tisa/frontend-project-lvl2#readme",
   "dependencies": {
     "commander": "^9.2.0",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@jest/globals": "^29.2.2",
     "jest": "^29.2.2"
-    }
+  }
 }
