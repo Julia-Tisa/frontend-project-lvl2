@@ -7,3 +7,5 @@
 [![asciicast](https://asciinema.org/a/vSbmoPvMxk3M3DPnsSpRQQZfj.svg)](https://asciinema.org/a/vSbmoPvMxk3M3DPnsSpRQQZfj)
 ### Asciinema with yaml files
 [![asciicast](https://asciinema.org/a/te3A76vw7r2SLvA6IAA18jFio.svg)](https://asciinema.org/a/te3A76vw7r2SLvA6IAA18jFio)
+### Asciinema with nested structures
+[![asciicast](https://asciinema.org/a/4cXv5UwRvepIjj001HzzynVxU.svg)](https://asciinema.org/a/4cXv5UwRvepIjj001HzzynVxU)
