@@ -5,7 +5,10 @@ const formatter = (trees, format = 'stylish') => {
     if (format === 'stylish') {
       return stylish(trees);
     }
-    return plain(trees);
+    if (format === 'plain') {
+      return plain(trees);
+    }
+    return JSON.stringify(trees);
   }
 
 export default formatter;
