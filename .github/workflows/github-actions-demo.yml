@@ -16,3 +16,13 @@ jobs:
       - run: make install
       - run: make lint
       - run: make test
+      - name: Test & publish code coverage
+        # Publish code coverage on Code Climate
+        # https://github.com/paambaati/codeclimate-action
+        uses: paambaati/codeclimate-action@v3.2.0
+        # Add Code Climate secret key
+        env:
+          CC_TEST_REPORTER_ID: 165b6a9be8dc128c299183f3fabd3e323ee7be3dc37558cb735db11466e1ab6c
+        with:
+          coverageCommand: make test-coverage
+          debug: true
