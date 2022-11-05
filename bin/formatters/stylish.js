@@ -44,10 +44,4 @@ const stylish = (diff) => {
     return `{\n${result.join('\n')}\n}`;
   };
 
-  const formatter = (trees, format = 'stylish') => {
-    if (format === 'stylish') {
-      return stylish(trees);
-    }
-  }
-
-export default formatter;
+export default stylish;

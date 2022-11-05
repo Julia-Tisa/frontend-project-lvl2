@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 import parser from './parsers.js';
-import formatter from './formatter.js';
+import formatter from './formatters/index.js';
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), '__fixtures__', filepath);
 const buildTree = (obj1, obj2) => {
@@ -33,6 +33,7 @@ const file1 = fs.readFileSync(getFullPath(filepath1), 'utf-8');
 const file2 = fs.readFileSync(getFullPath(filepath2), 'utf-8');
 const [parsingFile1, parsingFile2] = parser(file1, file2, format);
 const futer = buildTree(parsingFile1, parsingFile2);
+
 return formatter(futer, formatOffile);
 }
 export default genDiff;
