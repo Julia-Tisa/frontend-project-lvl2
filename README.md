@@ -9,3 +9,5 @@
 [![asciicast](https://asciinema.org/a/te3A76vw7r2SLvA6IAA18jFio.svg)](https://asciinema.org/a/te3A76vw7r2SLvA6IAA18jFio)
 ### Asciinema with nested structures
 [![asciicast](https://asciinema.org/a/4cXv5UwRvepIjj001HzzynVxU.svg)](https://asciinema.org/a/4cXv5UwRvepIjj001HzzynVxU)
+### Asciinema with plain
+[![asciicast](https://asciinema.org/a/zAqi50hWyD6DsHJWq4YfFhYkp.svg)](https://asciinema.org/a/zAqi50hWyD6DsHJWq4YfFhYkp)
