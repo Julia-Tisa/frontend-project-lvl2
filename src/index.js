@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 import parser from './parsers.js';
-import formatter from './formatters/index.js';
+import formatter from '../formatters/index.js';
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), '__fixtures__', filepath);
 const buildTree = (obj1, obj2) => {

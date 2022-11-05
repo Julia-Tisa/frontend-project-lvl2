@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals';
-import genDiff from '../bin/index.js';
+import genDiff from '../src/index.js';
 import fs from 'fs';
-import path from 'path'
+import path from 'path';
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), '__fixtures__', filepath);
 const readFile = (filepath) => fs.readFileSync(getFullPath(filepath), 'utf-8');
