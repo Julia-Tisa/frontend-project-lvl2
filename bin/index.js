@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 import parser from './parsers.js';
+import formatter from './formatter.js';
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), '__fixtures__', filepath);
 const buildTree = (obj1, obj2) => {
@@ -25,56 +26,13 @@ const buildTree = (obj1, obj2) => {
     });
     return nodes;
   };
-  const makeIndent = (depth) => {
-    const str = ' ';
-    return str.repeat(depth * 4 - 2);
-  };
-  
-  const stringify = (value, depth = 1) => {
-    if (!_.isObject(value)) {
-      return value;
-    }
-    const valueKeys = Object.keys(value);
-    const mapKeys = valueKeys.map((key) => `${makeIndent(depth + 1)}  ${key}: ${stringify(value[key], depth + 1)}`);
-    return `{\n${mapKeys.join('\n')}\n  ${makeIndent(depth)}}`;
-  };
-  
-  const stylish = (diff) => {
-    const symbols = {
-      unchanged: ' ',
-      removed: '-',
-      added: '+',
-    };
-    const iter = (node, depth = 1) => {
-      const {
-        key, type, value, oldValue, children,
-      } = node;
-      switch (type) {
-        case 'unchanged':
-        case 'added':
-        case 'removed':
-          return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
-        case 'changed':
-          return [
-            `${makeIndent(depth)}${symbols.removed} ${key}: ${stringify(oldValue, depth)}`,
-            `${makeIndent(depth)}${symbols.added} ${key}: ${stringify(value, depth)}`,
-          ];
-        case 'nested':
-          return `${makeIndent(depth)}  ${key}: {\n${children.flatMap((child) => iter(child, depth + 1)).join('\n')}\n${makeIndent(depth)}  }`;
-        default:
-          throw new Error(`Unknown type: ${type}`);
-      }
-    };
-    const result = diff.flatMap((node) => iter(node));
-    return `{\n${result.join('\n')}\n}`;
-  };
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, formatOffile) => {
 const format = filepath1.split('.')[1];
 const file1 = fs.readFileSync(getFullPath(filepath1), 'utf-8');
 const file2 = fs.readFileSync(getFullPath(filepath2), 'utf-8');
 const [parsingFile1, parsingFile2] = parser(file1, file2, format);
 const futer = buildTree(parsingFile1, parsingFile2);
-return stylish(futer);
+return formatter(futer, formatOffile);
 }
 export default genDiff;
