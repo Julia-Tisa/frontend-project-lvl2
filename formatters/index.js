@@ -9,6 +9,6 @@ const formatter = (trees, format = 'stylish') => {
     return plain(trees);
   }
   return JSON.stringify(trees);
-  };
+};
 
 export default formatter;

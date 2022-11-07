@@ -14,7 +14,7 @@ const parseFile = (filepath) => {
   const file = fs.readFileSync(getFullPath(filepath), 'utf-8');
   const resultFile = parser(file, format);
   return resultFile;
-}
+};
 const buildTree = (obj1, obj2) => {
   const keys = [obj1, obj2].flatMap(Object.keys);
   const unionKeys = _.sortBy(_.union(keys));
@@ -37,7 +37,7 @@ const buildTree = (obj1, obj2) => {
   return nodes;
 };
 
-  const genDiff = (filepath1, filepath2, formatOffile) => {
+const genDiff = (filepath1, filepath2, formatOffile) => {
   const [parsingFile1, parsingFile2] = [filepath1, filepath2].flatMap(parseFile);
   const tree = buildTree(parsingFile1, parsingFile2);
 
