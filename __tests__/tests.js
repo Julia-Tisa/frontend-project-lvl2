@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals';
-import genDiff from '../src/index.js';
 import fs from 'fs';
 import path from 'path';
+import genDiff from '../src/index.js';
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), '__fixtures__', filepath);
 const readFile = (filepath) => fs.readFileSync(getFullPath(filepath), 'utf-8');
@@ -15,17 +15,17 @@ const resultStylish = readFile('resultFileStylish.txt');
 const resultPlain = readFile('resultFilePlain.txt');
 const resultJson = readFile('resultFileJson.txt');
 
-test('test with stylish format', () => {
-    expect(genDiff(filepathJson1, filepathJson2, 'stylish')).toBe(resultStylish);
-    expect(genDiff(filepathYaml1, filepathYaml2, 'stylish')).toBe(resultStylish);
+test('with stylish format', () => {
+  expect(genDiff(filepathJson1, filepathJson2, 'stylish')).toBe(resultStylish);
+  expect(genDiff(filepathYaml1, filepathYaml2, 'stylish')).toBe(resultStylish);
 });
 
-test('test with plain format', () => {
+test('with plain format', () => {
   expect(genDiff(filepathJson1, filepathJson2, 'plain')).toBe(resultPlain);
   expect(genDiff(filepathYaml1, filepathYaml2, 'plain')).toBe(resultPlain);
 });
 
-test('test with json format', () => {
+test('with json format', () => {
   expect(genDiff(filepathJson1, filepathJson2, 'json')).toBe(resultJson);
   expect(genDiff(filepathYaml1, filepathYaml2, 'json')).toBe(resultJson);
 });
