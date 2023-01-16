@@ -1,8 +1,27 @@
 import path from 'path';
 import fs from 'fs';
-import _ from 'lodash';
 import parser from './parsers.js';
-import formatter from '../formatters/index.js';
+import formatter from './formatters/index.js';
+import buildTree from './buildTree.js';
+
+/* По поводу функции  getFullPath: она создана так для того, чтобы, если пользователь
+передаст абсолютный путь до файла, функция вычленила только название файла
+и относительно него построит путь до файла в папке фикстур. Иначе выскакивает такая ошибка:
+Error: ENOENT: no such file or directory, open '/Users/yulek/frontend-project-lvl2/__fixtures__/Users/yulek/frontend-project-lvl2/__fixtures__/file1.json'
+и path.resolve никак ее не сглаживает, не использует абсолютный путь вместо
+построения нового. Возможно, я как-то не так пользуюсь path.resolve, в
+таком случае прошу о более развернутом комментарии, спасибо. И
+по поводу того, что указана при построении пути папка фикстур: действительно 
+вне этой папки файлы не будут работать, мы для этого и создаем папку фикстур,
+чтобы знать, куда обращаться за файлами, разве не так?*/
+
+/* По поводу обертки в объект с типом root, не совсем понятно, что с этим
+делать и как это может помочь убрать итеры. На них базируется все построение
+вывода текста программы, зачем этот объект передавать в парсер, если парсируется
+только начальный файл. Или зачем создавать объект, чтобы потом его опять раскрывать
+и взаимодействовать с типами вложенного объекта.Я строила программу, 
+исходя из испытания нахождения различий в курсе объекты, так что 
+сложно понять, что предложено сделать*/
 
 const getFullPath = (filepath) => {
   const arrFilepath = filepath.split('/');
@@ -15,30 +34,10 @@ const parseFile = (filepath) => {
   const resultFile = parser(file, format);
   return resultFile;
 };
-const buildTree = (obj1, obj2) => {
-  const keys = [obj1, obj2].flatMap(Object.keys);
-  const unionKeys = _.sortBy(_.union(keys));
-  const nodes = unionKeys.map((key) => {
-    const [value1, value2] = [obj1[key], obj2[key]];
-    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
-      return {
-        key,
-        type: 'nested',
-        children: buildTree(value1, value2),
-      };
-    }
-    if (!Object.hasOwn(obj1, key)) { return { key, type: 'added', value: value2 }; }
-    if (!Object.hasOwn(obj2, key)) { return { key, type: 'removed', value: value1 }; }
-    if (value1 === value2) { return { key, type: 'unchanged', value: value1 }; }
-    return {
-      key, type: 'changed', value: value2, oldValue: value1,
-    };
-  });
-  return nodes;
-};
 
 const genDiff = (filepath1, filepath2, formatOffile) => {
-  const [parsingFile1, parsingFile2] = [filepath1, filepath2].flatMap(parseFile);
+  const parsingFile1 = parseFile(filepath1);
+  const parsingFile2 = parseFile(filepath2);
   const tree = buildTree(parsingFile1, parsingFile2);
 
   return formatter(tree, formatOffile);

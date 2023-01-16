@@ -3,6 +3,7 @@ import yaml from 'js-yaml';
 const parser = (file, format) => {
   switch (format) {
     case 'yaml':
+      return yaml.load(file);
     case 'yml':
       return yaml.load(file);
     case 'json':

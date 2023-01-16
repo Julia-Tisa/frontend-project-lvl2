@@ -26,7 +26,9 @@ const stylish = (diff) => {
     } = node;
     switch (type) {
       case 'unchanged':
+        return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
       case 'added':
+        return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
       case 'removed':
         return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
       case 'changed':
