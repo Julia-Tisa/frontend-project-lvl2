@@ -24,11 +24,8 @@ Error: ENOENT: no such file or directory, open '/Users/yulek/frontend-project-lv
 исходя из испытания нахождения различий в курсе объекты, так что
 сложно понять, что предложено сделать */
 
-const getFullPath = (filepath) => {
-  const arrFilepath = filepath.split('/');
-  const cutFilepath = arrFilepath[arrFilepath.length - 1];
-  return path.resolve(process.cwd(), '__fixtures__', cutFilepath);
-};
+const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
+
 const parseFile = (filepath) => {
   const format = filepath.split('.')[1];
   const file = fs.readFileSync(getFullPath(filepath), 'utf-8');
