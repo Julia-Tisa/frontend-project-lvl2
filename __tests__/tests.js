@@ -16,25 +16,15 @@ const resultPlain = readFile('resultFilePlain.txt');
 const resultJson = readFile('resultFileJson.txt');
 
 test.each([
-  [filepathJson1, filepathJson2, resultStylish],
-  [filepathYaml1, filepathYaml2, resultStylish],
-  [filepathJson1, filepathYaml2, resultStylish],
-])('%s, %s', (a, b, expected) => {
-  expect(genDiff(a, b, 'stylish')).toBe(expected);
-});
-
-test.each([
-  [filepathJson1, filepathJson2, resultPlain],
-  [filepathYaml1, filepathYaml2, resultPlain],
-  [filepathYaml1, filepathJson2, resultPlain],
-])('%s, %s', (a, b, expected) => {
-  expect(genDiff(a, b, 'plain')).toBe(expected);
-});
-
-test.each([
-  [filepathJson1, filepathJson2, resultJson],
-  [filepathYaml1, filepathYaml2, resultJson],
-  [filepathJson1, filepathYaml2, resultJson],
-])('%s, %s', (a, b, expected) => {
-  expect(genDiff(a, b, 'json')).toBe(expected);
+  [filepathJson1, filepathJson2, 'stylish', resultStylish],
+  [filepathYaml1, filepathYaml2, 'stylish', resultStylish],
+  [filepathJson1, filepathYaml2, 'stylish', resultStylish],
+  [filepathJson1, filepathJson2, 'plain', resultPlain],
+  [filepathYaml1, filepathYaml2, 'plain', resultPlain],
+  [filepathYaml1, filepathJson2, 'plain', resultPlain],
+  [filepathJson1, filepathJson2, 'json', resultJson],
+  [filepathYaml1, filepathYaml2, 'json', resultJson],
+  [filepathJson1, filepathYaml2, 'json', resultJson],
+])('%s, %s', (file1, file2, style, expected) => {
+  expect(genDiff(file1, file2, style)).toBe(expected);
 });
