@@ -15,8 +15,8 @@ const plain = (node, path = '') => {
     tree, key, type, value, oldValue, children,
   } = node;
   switch (type) {
-    case 'root': 
-      return `${tree.flatMap((entity) => plain(entity)).join('\n')}`
+    case 'root':
+      return `${tree.flatMap((entity) => plain(entity)).join('\n')}`;
     case 'nested':
       return children.flatMap((child) => plain(child, `${path}${key}.`)).join('\n');
     case 'added':

@@ -22,10 +22,10 @@ const stylish = (node, depth = 1) => {
   };
   const {
     tree, key, type, value, oldValue, children,
-    } = node;
+  } = node;
   switch (type) {
     case 'root':
-      return `{\n${tree.flatMap((entity) => stylish(entity)).join('\n')}\n}`
+      return `{\n${tree.flatMap((entity) => stylish(entity)).join('\n')}\n}`;
     case 'unchanged':
       return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
     case 'added':
