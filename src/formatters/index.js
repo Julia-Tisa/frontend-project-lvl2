@@ -1,14 +1,14 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-const formatter = (trees, format = 'stylish') => {
+const formatter = (mainTree, format = 'stylish') => {
   if (format === 'stylish') {
-    return stylish(trees);
+    return stylish(mainTree);
   }
   if (format === 'plain') {
-    return plain(trees);
+    return plain(mainTree);
   }
-  return JSON.stringify(trees);
+  return JSON.stringify(mainTree.tree);
 };
 
 export default formatter;

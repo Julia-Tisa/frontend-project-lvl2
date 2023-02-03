@@ -14,36 +14,34 @@ const stringify = (value, depth = 1) => {
   return `{\n${mapKeys.join('\n')}\n  ${makeIndent(depth)}}`;
 };
 
-const stylish = (diff) => {
+const stylish = (node, depth = 1) => {
   const symbols = {
     unchanged: ' ',
     removed: '-',
     added: '+',
   };
-  const iter = (node, depth = 1) => {
-    const {
-      key, type, value, oldValue, children,
+  const {
+    tree, key, type, value, oldValue, children,
     } = node;
-    switch (type) {
-      case 'unchanged':
-        return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
-      case 'added':
-        return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
-      case 'removed':
-        return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
-      case 'changed':
-        return [
-          `${makeIndent(depth)}${symbols.removed} ${key}: ${stringify(oldValue, depth)}`,
-          `${makeIndent(depth)}${symbols.added} ${key}: ${stringify(value, depth)}`,
-        ];
-      case 'nested':
-        return `${makeIndent(depth)}  ${key}: {\n${children.flatMap((child) => iter(child, depth + 1)).join('\n')}\n${makeIndent(depth)}  }`;
-      default:
-        throw new Error(`Unknown type: ${type}`);
-    }
-  };
-  const result = diff.flatMap((node) => iter(node));
-  return `{\n${result.join('\n')}\n}`;
+  switch (type) {
+    case 'root':
+      return `{\n${tree.flatMap((entity) => stylish(entity)).join('\n')}\n}`
+    case 'unchanged':
+      return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
+    case 'added':
+      return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
+    case 'removed':
+      return `${makeIndent(depth)}${symbols[type]} ${key}: ${stringify(value, depth)}`;
+    case 'changed':
+      return [
+        `${makeIndent(depth)}${symbols.removed} ${key}: ${stringify(oldValue, depth)}`,
+        `${makeIndent(depth)}${symbols.added} ${key}: ${stringify(value, depth)}`,
+      ];
+    case 'nested':
+      return `${makeIndent(depth)}  ${key}: {\n${children.flatMap((child) => stylish(child, depth + 1)).join('\n')}\n${makeIndent(depth)}  }`;
+    default:
+      throw new Error(`Unknown type: ${type}`);
+  }
 };
 
 export default stylish;
