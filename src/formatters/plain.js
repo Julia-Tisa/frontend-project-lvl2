@@ -14,17 +14,18 @@ const plain = (node, path = '') => {
   const {
     tree, key, type, value, oldValue, children,
   } = node;
+  const property = `${path}${key}`;
   switch (type) {
     case 'root':
       return `${tree.flatMap((entity) => plain(entity)).join('\n')}`;
     case 'nested':
-      return children.flatMap((child) => plain(child, `${path}${key}.`)).join('\n');
+      return children.flatMap((child) => plain(child, `${property}.`)).join('\n');
     case 'added':
-      return `Property '${path}${key}' was added with value: ${stringify(value)}`;
+      return `Property '${property}' was added with value: ${stringify(value)}`;
     case 'removed':
-      return `Property '${path}${key}' was removed`;
+      return `Property '${property}' was removed`;
     case 'changed':
-      return `Property '${path}${key}' was updated. From ${stringify(oldValue)} to ${stringify(value)}`;
+      return `Property '${property}' was updated. From ${stringify(oldValue)} to ${stringify(value)}`;
     case 'unchanged':
       return [];
     default:

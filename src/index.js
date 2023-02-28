@@ -16,9 +16,9 @@ const parseFile = (filepath) => {
 const genDiff = (filepath1, filepath2, formatOffile) => {
   const parsingFile1 = parseFile(filepath1);
   const parsingFile2 = parseFile(filepath2);
-  const tree = buildTree(parsingFile1, parsingFile2);
-  const mainTree = { tree, type: 'root' };
+  const mainTree = buildTree(parsingFile1, parsingFile2);
 
   return formatter(mainTree, formatOffile);
 };
+
 export default genDiff;

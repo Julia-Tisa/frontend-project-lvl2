@@ -25,4 +25,9 @@ const buildTree = (obj1, obj2) => {
   return nodes;
 };
 
-export default buildTree;
+const buildMainTree = (obj1, obj2) => {
+const tree = buildTree(obj1, obj2);
+return {tree, type: 'root'};
+}
+
+export default buildMainTree;
