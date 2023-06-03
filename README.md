@@ -3,6 +3,19 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/d415a8fd09d27c0fd771/maintainability)](https://codeclimate.com/github/Julia-Tisa/frontend-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d415a8fd09d27c0fd771/test_coverage)](https://codeclimate.com/github/Julia-Tisa/frontend-project-lvl2/test_coverage)
 [![GitHub Actions](https://github.com/Julia-Tisa/frontend-project-lvl2/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/Julia-Tisa/frontend-project-lvl2/actions/workflows/github-actions-demo.yml)
+## Description
+'Difference calculator' is a program that determines the difference between two data structures.
+## Minimum requirements
+_Make sure you have Node.js version 13 or higher installed_
+## Setup
+```bash
+make install
+```
+## Help output
+```bash
+gendiff -h
+```
+
 ### Asciinema with json files
 [![asciicast](https://asciinema.org/a/vSbmoPvMxk3M3DPnsSpRQQZfj.svg)](https://asciinema.org/a/vSbmoPvMxk3M3DPnsSpRQQZfj)
 ### Asciinema with yaml files
